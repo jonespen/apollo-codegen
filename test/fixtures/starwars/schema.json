@@ -669,6 +669,22 @@
               "deprecationReason": null
             },
             {
+              "name": "title",
+              "description": "What this human calls themselves",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": true,
+              "deprecationReason": "Use `name`."
+            },
+            {
               "name": "homePlanet",
               "description": "The home planet of the human, or null if unknown",
               "args": [],

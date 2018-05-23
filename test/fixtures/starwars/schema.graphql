@@ -51,6 +51,8 @@ type Human implements Character {
   id: ID!
   # What this human calls themselves
   name: String!
+  # What this human calls themselves
+  title: String! @deprecated(reason: "Use `name`.")
   # The home planet of the human, or null if unknown
   homePlanet: String
   # Height in the preferred unit, default is meters

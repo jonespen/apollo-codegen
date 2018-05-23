@@ -396,5 +396,50 @@ describe('Flow code generation', function() {
       const source = generateSource(context);
       expect(source).toMatchSnapshot();
     });
+
+    test('should emit warning if using deprecated field', () => {
+      const originalWarn = console.warn;
+      console.warn = jest.fn();
+
+      const { compileFromSource } = setup(miscSchema);
+      const context = compileFromSource(`
+        query RootScalar {
+          deprecatedScalarTest
+        }
+      `);
+
+      const source = generateSource(context);
+      expect(source).toMatchSnapshot();
+
+      expect(console.warn).toHaveBeenCalledWith('RootScalar: deprecatedScalarTest is deprecated, reason: "Use `scalarTest`."');
+
+      console.warn = originalWarn
+    });
+
+    test('should emit warning if using deprecated field in fragment', () => {
+      const originalWarn = console.warn;
+      console.warn = jest.fn();
+
+      const { compileFromSource } = setup(starWarsSchema);
+      const context = compileFromSource(`
+        query HumanName {
+          hero {
+            ...HumanWithTitle
+          }
+        }
+
+        fragment HumanWithTitle on Human {
+          __typename
+          title
+        }
+      `);
+
+      const source = generateSource(context);
+      expect(source).toMatchSnapshot();
+
+      expect(console.warn).toHaveBeenCalledWith('HumanWithTitle: title is deprecated, reason: "Use `name`."');
+
+      console.warn = originalWarn
+    });
   });
 });

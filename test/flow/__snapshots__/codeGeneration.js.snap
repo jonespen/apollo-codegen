@@ -13,6 +13,39 @@ export type CustomScalarQuery = {|
 |};"
 `;
 
+exports[`Flow code generation #generateSource() should emit warning if using deprecated field 1`] = `
+"/* @flow */
+/* eslint-disable */
+//  This file was automatically generated and should not be edited.
+
+export type RootScalarQuery = {|
+  deprecatedScalarTest: boolean,
+|};"
+`;
+
+exports[`Flow code generation #generateSource() should emit warning if using deprecated field in fragment 1`] = `
+"/* @flow */
+/* eslint-disable */
+//  This file was automatically generated and should not be edited.
+
+export type HumanNameQuery = {|
+  hero: ?( {
+      __typename: \\"Human\\",
+      // What this human calls themselves
+      title: string,
+    } | {
+      __typename: \\"Droid\\",
+    }
+  ),
+|};
+
+export type HumanWithTitleFragment = {|
+  __typename: \\"Human\\",
+  // What this human calls themselves
+  title: string,
+|};"
+`;
+
 exports[`Flow code generation #generateSource() should generate array query operations 1`] = `
 "/* @flow */
 /* eslint-disable */

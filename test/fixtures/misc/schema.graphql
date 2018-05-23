@@ -66,4 +66,5 @@ type Query {
   interfaceTest: InterfaceTestCase
   unionTest: UnionTestCase
   scalarTest: Boolean!
+  deprecatedScalarTest: Boolean! @deprecated(reason: "Use `scalarTest`.")
 }

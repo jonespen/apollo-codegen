@@ -133,3 +133,12 @@ export function propertySetsDeclaration(generator, property, propertySets, stand
     generator.print(',');
   }
 }
+
+export function warnOnDeprecatedFields(operationOrFragment){
+  const name = operationOrFragment.operationName || operationOrFragment.fragmentName
+  operationOrFragment.fields.forEach((field) => {
+    if (field.isDeprecated) {
+      console.warn(`${name}: ${field.fieldName} is deprecated, reason: "${field.deprecationReason}"`);
+    }
+  })
+}

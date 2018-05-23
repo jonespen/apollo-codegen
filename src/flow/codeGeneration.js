@@ -32,7 +32,8 @@ import CodeGenerator from '../utilities/CodeGenerator';
 import {
   typeDeclaration,
   propertyDeclaration,
-  propertySetsDeclaration
+  propertySetsDeclaration,
+  warnOnDeprecatedFields
 } from './language';
 
 import {
@@ -51,9 +52,11 @@ export function generateSource(context) {
   Object.values(context.operations).forEach(operation => {
     interfaceVariablesDeclarationForOperation(generator, operation);
     typeDeclarationForOperation(generator, operation);
+    warnOnDeprecatedFields(operation);
   });
   Object.values(context.fragments).forEach(fragment => {
-    typeDeclarationForFragment(generator, fragment)
+    typeDeclarationForFragment(generator, fragment);
+    warnOnDeprecatedFields(fragment);
   });
 
   return generator.output;
